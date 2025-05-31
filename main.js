@@ -54,7 +54,7 @@ function parseDiceExpression(expression) {
     // 生成展开表达式字符串
     const expressionParts = expandedTerms.map((val, index) => {   
         if (index === 0) return val.toString();
-        return val >= 0 ? `+${val}` : `${val}`;
+        return val >= 0 ? `+ ${val}` : `${val}`;
     });
 
     return {
@@ -79,7 +79,7 @@ const buttons = {
 // 为每个按钮添加点击事件
 Object.keys(buttons).forEach(diceType => {
     buttons[diceType].addEventListener('click', () => {
-        diceInput.value += "+" + buttons[diceType].innerText;
+        diceInput.value += " + " + buttons[diceType].innerText;
     });
 });
 
@@ -105,7 +105,11 @@ document.getElementById('rollButton').addEventListener('click', () => {
     }, 200);
     setTimeout(() => {
         result = parseDiceExpression(diceInput.value);
-        diceOutput.value = "Expression: " + result.expression + "\n" + "Total: " + result.total;
+        if(result.expression == result.total.toString()){
+            diceOutput.value = "= " + result.expression;
+        }else{
+            diceOutput.value = "= " + result.expression + "\n" + "= " + result.total;
+        }
     }, 200);
 
 });

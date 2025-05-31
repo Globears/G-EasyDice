@@ -23,16 +23,16 @@ body {
 /* 调整输入框宽度 */
 #diceInput {
     font-weight: bold;;
-    width: 300px;  /* 原200px调整为150px */
+    width: 400px;  /* 原200px调整为150px */
     height: 30px;
     padding: 5px;
     font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     font-size: large;
-    border-color: #63ab3f;
+    border-color: #8f4d57;
     border-radius: 3px;
     border-width: 3px;
     border-style: solid;
-    color: #283540;
+    color: #52333f;
     font-style: italic;
 }
 #diceInput::placeholder{
@@ -62,17 +62,18 @@ body {
 }
 
 #resultOutput {
-    width: 300px;
+    width: 400px;
     height: 80px;
     padding: 5px;
     font-size: 18px;
     font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-weight: bold;;
-    border: 2px solid #4c6885;
+    border: 3px solid #4c6885;
     border-radius: 8px;
     background-color: #f8f8f8;
-    resize: none;
+    resize: both;
     color: #283540;
+    margin-bottom: 5px;
 }
 
 
@@ -99,7 +100,7 @@ button {
     padding: 12px 24px;
     font-size: 16px;
     cursor: pointer;
-    background-color: #63ab3f;
+    background-color: #4c6885;
     color: white;
     border: none;
     border-radius: 3px;
@@ -107,5 +108,5 @@ button {
 }
 
 button:hover {
-    background-color: #3b7d4f;
+    background-color: #3a3f5e;
 }
