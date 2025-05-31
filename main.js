@@ -1,6 +1,17 @@
 
 const diceInput = document.getElementById('diceInput');
-const diceOutput = document.getElementById('resultOutput');
+const diceOutputs = document.querySelectorAll('.result');
+
+const numberButtons = document.querySelectorAll('.number-button');
+
+const dices = {
+    d20: document.getElementById('d20'),
+    d10: document.getElementById('d10'),
+    d8: document.getElementById('d8'),
+    d6: document.getElementById('d6'),
+    d4: document.getElementById('d4'),
+    d100: document.getElementById('d100'),
+};
 
 function parseDiceExpression(expression) {
     // 移除所有空格并拆分表达式为带符号的项
@@ -64,53 +75,58 @@ function parseDiceExpression(expression) {
 }
 
 
-// 获取页面元素
+// 为每个骰子添加点击事件
+Object.keys(dices).forEach(diceType => {
+    dices[diceType].addEventListener('click', () => {
+        diceInput.value += " + " + dices[diceType].innerText;
+    });
+});
 
-const buttons = {
-    d20: document.getElementById('d20'),
-    d10: document.getElementById('d10'),
-    d8: document.getElementById('d8'),
-    d6: document.getElementById('d6'),
-    d4: document.getElementById('d4'),
-    d100: document.getElementById('d100'),
-};
-
-
-// 为每个按钮添加点击事件
-Object.keys(buttons).forEach(diceType => {
-    buttons[diceType].addEventListener('click', () => {
-        diceInput.value += " + " + buttons[diceType].innerText;
+// 为每个数字按钮添加点击事件
+numberButtons.forEach(button => {
+    button.addEventListener('click', () => {
+        diceInput.value += button.innerText;
     });
 });
 
 document.getElementById('clearButton').addEventListener('click', () => {
     diceInput.value = '';
-    diceOutput.value = '';
+    for (const output of diceOutputs) {
+        output.value = '';
+    }
 });
 
-function RandomAnimation(){
-    diceOutput.value = '';
+function RandomAnimation(text){
+    text.value = '';
     characters = "1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
     for(let i = 0 ; i < 20 ; i ++){
-        diceOutput.value += characters.charAt(Math.floor(Math.random() * characters.length));
+        text.value += characters.charAt(Math.floor(Math.random() * characters.length));
     }
 }
 
-document.getElementById('rollButton').addEventListener('click', () => {
-    
-    let anim = setInterval(RandomAnimation, 20);
+function OutputRandomResult(input, output) {
+    let result = parseDiceExpression(input.value);
+    let anim = setInterval(() => RandomAnimation(output), 20);
     setTimeout(() => {
         clearInterval(anim);
-        diceOutput.value = '';
+        output.value = '';
     }, 200);
     setTimeout(() => {
-        result = parseDiceExpression(diceInput.value);
+        result = parseDiceExpression(input.value);
         if(result.expression == result.total.toString()){
-            diceOutput.value = "= " + result.expression;
+            output.value = "= " + result.expression;
         }else{
-            diceOutput.value = "= " + result.expression + "\n" + "= " + result.total;
+            output.value = "= " + result.expression + "\n" + "= " + result.total;
         }
     }, 200);
+
+}
+
+document.getElementById('rollButton').addEventListener('click', () => {
+
+    for (const output of diceOutputs) {
+        OutputRandomResult(diceInput, output);
+    }
 
 });
 

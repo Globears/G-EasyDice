@@ -8,21 +8,43 @@
 </head>
 <body>
     <div class="container">
-        <div class="input-group">
+        <div class="text-part">
             <input type="text" id="diceInput" placeholder="d20 + 2d6 -3...">
-            <button id="rollButton">ROLL</button>
-            <button id="clearButton">CLEAR</button>
-            
+            <textarea class="result" readonly></textarea>
+            <textarea class="result" readonly></textarea>
         </div>
-        <textarea id="resultOutput" readonly></textarea>
-        <div class="dice-buttons">
-            <button class="dice-button" id="d20">d20</button>
-            <button class="dice-button" id="d10">d10</button>
-            <button class="dice-button" id="d8">d8</button>
-            <button class="dice-button" id="d6">d6</button>
-            <button class="dice-button" id="d4">d4</button>
-            <button class="dice-button" id="d100">d100</button>
+    
+        <div class="button-part">
+            <div class="action-panel">
+                <button id="rollButton">ROLL</button>
+                <button id="clearButton">CLEAR</button>
+            </div>
+
+            <div class="dice-panel">
+                <button class="dice-button" id="d20">d20</button>
+                <button class="dice-button" id="d10">d10</button>
+                <button class="dice-button" id="d8">d8</button>
+                <button class="dice-button" id="d6">d6</button>
+                <button class="dice-button" id="d4">d4</button>
+                <button class="dice-button" id="d100">d100</button>
+            </div>
+
+            <div class="number-panel">
+                <button class="number-button" id="1">1</button>
+                <button class="number-button" id="2">2</button>
+                <button class="number-button" id="3">3</button>
+                <button class="number-button" id="4">4</button>
+                <button class="number-button" id="5">5</button>
+                <button class="number-button" id="6">6</button>
+                <button class="number-button" id="7">7</button>
+                <button class="number-button" id="8">8</button>
+                <button class="number-button" id="9">9</button>
+                <button class="number-button" id="-">-</button>
+                <button class="number-button" id="0">0</button>
+                <button class="number-button" id="+">+</button>
+            </div>
         </div>
+        
     </div>
     <script src="main.js"></script>
     

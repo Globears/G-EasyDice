@@ -13,11 +13,14 @@ body {
 }
 
         
-.input-group {
+.text-part {
+    float:left;
     display: flex;
-    align-items: center;
+    align-items: left;
     gap: 10px;
-    margin-bottom: 10px;
+    margin: 5px;
+    display: flex;
+    flex-direction: column;
 }
 
 /* 调整输入框宽度 */
@@ -39,16 +42,46 @@ body {
     color: #9E9E9E;  /* 占位符颜色 */
     font-style: italic;  /* 斜体样式 */
 }
+.result {
+    width: 400px;
+    height: 120px;
+    padding: 5px;
+    font-size: 18px;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: bold;;
+    border: 3px solid #4c6885;
+    border-radius: 8px;
+    background-color: #f8f8f8;
+    resize: vertical;
+    color: #283540;
+    margin-bottom: 5px;
+}
+
+.button-part{
+    float:right;
+    display: flex;
+    align-items: left;
+    gap: 10px;
+    margin: 5px;
+    flex-direction: column;
+}
+
+.action-panel{
+    display: flex;
+    align-items: left;
+    margin : 5px;
+    gap: 5px;
+}
 
 /* Roll按钮专用样式 */
 #rollButton {
-    background-color: #4c6885;  /* 蓝色区分操作按钮 */
+    background-color: #3b7d4f;  /* 蓝色区分操作按钮 */
     height: 30px;
     padding: 0px 20px;
     font-weight: bold;;
 }
 #rollButton:hover {
-    background-color: #3a3f5e;  /* 深蓝色悬停效果 */
+    background-color: #2f5753;  /* 深蓝色悬停效果 */
 }
 
 #clearButton {
@@ -61,30 +94,14 @@ body {
     background-color: #ad2f45;  /* 深红色悬停效果 */
 }
 
-#resultOutput {
-    width: 400px;
-    height: 80px;
-    padding: 5px;
-    font-size: 18px;
-    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    font-weight: bold;;
-    border: 3px solid #4c6885;
-    border-radius: 8px;
-    background-color: #f8f8f8;
-    resize: both;
-    color: #283540;
-    margin-bottom: 5px;
-}
-
-
-.dice-buttons {
+.dice-panel {
     display: flex;
     flex-wrap: wrap;
     max-width: 300px;
     align-items: left;
     gap: 10px;
     border-radius: 2px;
-    
+    margin: 5px;
 }
 .dice-button {
     height: 40px;
@@ -94,6 +111,29 @@ body {
     font-size: large;
     font-weight: bold;
     font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.number-panel{
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 300px;
+    align-items: left;
+    gap: 10px;
+    border-radius: 2px;
+    margin: 5px;
+}
+.number-button {
+    height: 40px;
+    width: 80px;
+    padding: 0px 10px;
+    text-align: center;
+    font-size: large;
+    font-weight: bold;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    background-color: #8f4d57;
+}
+.number-button:hover {
+    background-color: #52333f;  /* 鼠标悬停时的背景色 */
 }
 
 button {
