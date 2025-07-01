@@ -187,14 +187,14 @@ function Roll(input, outputs, advantage) {
 
 function CopyResult(input, outputs){
     if(outputs[1].value != ''){
-        res = '[骰点结果]\n';
+        res = '[Result]\n';
         res += input.value + '\n';
-        res += '------第一骰------\n';
+        res += '------First------\n';
         res += outputs[0].value + '\n';
-        res += '------第二骰------\n';
+        res += '------Second------\n';
         res += outputs[1].value;
     }else{
-        res = '[骰点结果]\n';
+        res = '[Result]\n';
         res += input.value + '\n';
         res += outputs[0].value;
     }
