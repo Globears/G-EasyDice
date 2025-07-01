@@ -1,17 +1,89 @@
+const rollModules = document.querySelectorAll('.roll-module');
 
-const diceInput = document.getElementById('diceInput');
-const diceOutputs = document.querySelectorAll('.result');
+for (const module of rollModules) {
+    const rollButton = module.querySelector('#roll-button');
+    const clearButton = module.querySelector('#clear-button');
+    const copyButton = module.querySelector('#copy-button');
+    const inputField = module.querySelector('.dice-input');
+    const outputFields = module.querySelectorAll('.dice-output');
 
-const numberButtons = document.querySelectorAll('.number-button');
+    rollButton.addEventListener('click', () => {
+        Roll(inputField, outputFields, false);
+    });
 
-const dices = {
-    d20: document.getElementById('d20'),
-    d10: document.getElementById('d10'),
-    d8: document.getElementById('d8'),
-    d6: document.getElementById('d6'),
-    d4: document.getElementById('d4'),
-    d100: document.getElementById('d100'),
-};
+    rollButton.addEventListener('contextmenu', () => {
+        preventDefault();
+        Roll(inputField, outputFields, true);
+    });
+
+    rollButton.addEventListener('click', () => {
+        setTimeout(() => {
+            CopyResult(inputField,outputFields);
+        }, 500);
+    });
+
+    rollButton.addEventListener('contextmenu', () => {
+        setTimeout(() => {
+            CopyResult(inputField,outputFields);
+        }, 500);
+    });
+
+    clearButton.addEventListener('click', () => {
+        inputField.value = '';
+        outputFields.forEach(outputField => outputField.value = '');
+    });
+
+    copyButton.addEventListener('click', () => {
+        CopyResult(inputField, outputFields);
+    });
+
+    const diceButtons = module.querySelectorAll('.dice-button');
+    diceButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            inputField.value += " + " + button.innerText;
+        });
+    });
+
+}
+
+const addCharacterButton = document.querySelector('#add-character-button');
+const rollInitiativeButton = document.querySelector('#roll-initiative-button');
+const characterList = document.querySelector('.characters');
+const characterTemplate = document.querySelector('.character');
+
+addCharacterButton.addEventListener('click', () => {
+    let newCharacter = characterTemplate.cloneNode(true);
+    newCharacter.querySelector('#remove-character-button').addEventListener('click', () => {
+        newCharacter.remove();
+    });
+    characterList.appendChild(newCharacter);
+});
+
+rollInitiativeButton.addEventListener('click', () => {
+    const characters = characterList.querySelectorAll('.character');
+    for(const character of characters){
+        
+        const total = character.querySelector('#character-initiative');
+        const bonus = character.querySelector('#character-initiative-bonus').value;
+        let rolled = Math.random() * 20 + 1; // 随机掷骰子1d20
+        rolled = Math.floor(rolled);
+
+        total.value = rolled + (Number(bonus) || 0); // 计算总和
+
+    }
+
+    // 按照总和排序
+    const sortedCharacters = Array.from(characters).sort((a, b) => {
+        const totalA = parseInt(a.querySelector('#character-initiative').value, 10);
+        const totalB = parseInt(b.querySelector('#character-initiative').value, 10);
+        return totalB - totalA; // 降序排序
+    });
+    // 清空列表并重新添加排序后的角色
+    characterList.innerHTML = ''; // 清空列表
+    sortedCharacters.forEach(character => {
+        characterList.appendChild(character);
+    });
+});
 
 function parseDiceExpression(expression) {
     // 移除所有空格并拆分表达式为带符号的项
@@ -75,59 +147,57 @@ function parseDiceExpression(expression) {
 }
 
 
-// 为每个骰子添加点击事件
-Object.keys(dices).forEach(diceType => {
-    dices[diceType].addEventListener('click', () => {
-        diceInput.value += " + " + dices[diceType].innerText;
-    });
-});
-
-// 为每个数字按钮添加点击事件
-numberButtons.forEach(button => {
-    button.addEventListener('click', () => {
-        diceInput.value += button.innerText;
-    });
-});
-
-document.getElementById('clearButton').addEventListener('click', () => {
-    diceInput.value = '';
-    for (const output of diceOutputs) {
-        output.value = '';
-    }
-});
-
-function RandomAnimation(text){
-    text.value = '';
+function RandomAnimation(output){
+    output.value = '';
     characters = "1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
     for(let i = 0 ; i < 20 ; i ++){
-        text.value += characters.charAt(Math.floor(Math.random() * characters.length));
+        output.value += characters.charAt(Math.floor(Math.random() * characters.length));
     }
 }
 
-function OutputRandomResult(input, output) {
-    let result = parseDiceExpression(input.value);
-    let anim = setInterval(() => RandomAnimation(output), 20);
+function Roll(input, outputs, advantage) {
+    outputs[0].value = '';
+    outputs[1].value = '';
+    let anim = setInterval(() => RandomAnimation(outputs[0]), 20);
     setTimeout(() => {
         clearInterval(anim);
-        output.value = '';
-    }, 200);
-    setTimeout(() => {
-        result = parseDiceExpression(input.value);
+        outputs[0].value = '';
+        let result = parseDiceExpression(input.value);
         if(result.expression == result.total.toString()){
-            output.value = "= " + result.expression;
+            outputs[0].value = "= " + result.expression;
         }else{
-            output.value = "= " + result.expression + "\n" + "= " + result.total;
+            outputs[0].value = "= " + result.expression + "\n" + "= " + result.total;
         }
     }, 200);
 
+    if (advantage){
+        let anim = setInterval(() => RandomAnimation(outputs[1]), 20);
+        setTimeout(() => {
+            clearInterval(anim);
+            outputs[1].value = '';
+            let result = parseDiceExpression(input.value);
+            if(result.expression == result.total.toString()){
+                outputs[1].value = "= " + result.expression;
+            }else{
+                outputs[1].value = "= " + result.expression + "\n" + "= " + result.total;
+            }
+        }, 200);
+    }
 }
 
-document.getElementById('rollButton').addEventListener('click', () => {
-
-    for (const output of diceOutputs) {
-        OutputRandomResult(diceInput, output);
+function CopyResult(input, outputs){
+    if(outputs[1].value != ''){
+        res = '[骰点结果]\n';
+        res += input.value + '\n';
+        res += '------第一骰------\n';
+        res += outputs[0].value + '\n';
+        res += '------第二骰------\n';
+        res += outputs[1].value;
+    }else{
+        res = '[骰点结果]\n';
+        res += input.value + '\n';
+        res += outputs[0].value;
     }
-
-});
-
+    navigator.clipboard.writeText(res);
+}
 

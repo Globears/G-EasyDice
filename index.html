@@ -8,42 +8,46 @@
 </head>
 <body>
     <div class="container">
-        <div class="text-part">
-            <input type="text" id="diceInput" placeholder="d20 + 2d6 -3...">
-            <textarea class="result" readonly></textarea>
-            <textarea class="result" readonly></textarea>
-        </div>
-    
-        <div class="button-part">
-            <div class="action-panel">
-                <button id="rollButton">ROLL</button>
-                <button id="clearButton">CLEAR</button>
-            </div>
 
-            <div class="dice-panel">
-                <button class="dice-button" id="d20">d20</button>
-                <button class="dice-button" id="d10">d10</button>
-                <button class="dice-button" id="d8">d8</button>
-                <button class="dice-button" id="d6">d6</button>
-                <button class="dice-button" id="d4">d4</button>
-                <button class="dice-button" id="d100">d100</button>
+        <div class="roll-module">
+            <div class="input-output-area"> 
+                <input type="text" class="dice-input" placeholder="d20 + 2d6 -3...">
+                <textarea class="dice-output" readonly></textarea>
+                <textarea class="dice-output" readonly></textarea>
             </div>
-
-            <div class="number-panel">
-                <button class="number-button" id="1">1</button>
-                <button class="number-button" id="2">2</button>
-                <button class="number-button" id="3">3</button>
-                <button class="number-button" id="4">4</button>
-                <button class="number-button" id="5">5</button>
-                <button class="number-button" id="6">6</button>
-                <button class="number-button" id="7">7</button>
-                <button class="number-button" id="8">8</button>
-                <button class="number-button" id="9">9</button>
-                <button class="number-button" id="-">-</button>
-                <button class="number-button" id="0">0</button>
-                <button class="number-button" id="+">+</button>
+            <div class="button-area">
+                <div class="action-buttons">
+                    <button class="action-button" id="roll-button">ROLL</button>
+                    <button class="action-button" id="copy-button">COPY</button>
+                    <button class="action-button" id="clear-button">CLEAR</button>
+                </div>
+                <div class="dice-buttons">
+                    <button class="dice-button" id="d20">d20</button>
+                    <button class="dice-button" id="d12">d12</button>
+                    <button class="dice-button" id="d10">d10</button>
+                    <button class="dice-button" id="d8">d8</button>
+                    <button class="dice-button" id="d6">d6</button>
+                    <button class="dice-button" id="d4">d4</button>
+                    <button class="dice-button" id="d100">d100</button>
+                </div>
             </div>
         </div>
+
+        <div class="initiative-module">
+            <div class="header-area">
+                <button id="add-character-button">Add</button>
+                <button id="roll-initiative-button">Roll Initiative</button>
+            </div>
+            <div class="characters">
+                <div class="character">
+                    <input type="text" class="character-input" id="character-name" placeholder="Character Name">
+                    <input type="number" class="character-input" id="character-initiative-bonus" placeholder="Initiative">
+                    <input type="number" class="character-input" id="character-initiative" placeholder="Total">
+                    <button id="remove-character-button">Remove</button>
+                </div>
+            </div>
+        </div>
+
         
     </div>
     <script src="main.js"></script>
