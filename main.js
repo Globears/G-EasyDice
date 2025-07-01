@@ -11,8 +11,8 @@ for (const module of rollModules) {
         Roll(inputField, outputFields, false);
     });
 
-    rollButton.addEventListener('contextmenu', () => {
-        preventDefault();
+    rollButton.addEventListener('contextmenu', (event) => {
+        event.preventDefault();
         Roll(inputField, outputFields, true);
     });
 
