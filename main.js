@@ -2,6 +2,7 @@ const rollModules = document.querySelectorAll('.roll-module');
 
 for (const module of rollModules) {
     const rollButton = module.querySelector('#roll-button');
+    const advButton = module.querySelector('#adv-button');
     const clearButton = module.querySelector('#clear-button');
     const copyButton = module.querySelector('#copy-button');
     const inputField = module.querySelector('.dice-input');
@@ -23,6 +24,16 @@ for (const module of rollModules) {
     });
 
     rollButton.addEventListener('contextmenu', () => {
+        setTimeout(() => {
+            CopyResult(inputField,outputFields);
+        }, 500);
+    });
+
+    advButton.addEventListener('click', (event) => {
+        Roll(inputField, outputFields, true);
+    });
+
+    advButton.addEventListener('click', () => {
         setTimeout(() => {
             CopyResult(inputField,outputFields);
         }, 500);
@@ -53,6 +64,10 @@ const characterTemplate = document.querySelector('.character');
 
 addCharacterButton.addEventListener('click', () => {
     let newCharacter = characterTemplate.cloneNode(true);
+    let inputs = newCharacter.querySelectorAll('.character-input');
+    for(const input of inputs){
+        input.value = '';
+    }
     newCharacter.querySelector('#remove-character-button').addEventListener('click', () => {
         newCharacter.remove();
     });

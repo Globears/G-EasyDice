@@ -11,7 +11,6 @@ body {
     display: flex;
     flex-direction: column;
     align-items: left;
-
     
 }
 
@@ -23,7 +22,7 @@ body {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     display: flex;
     align-items: left;
-    max-width: 720px;
+    max-width: 780px;
 }
 
 .input-output-area{
@@ -94,6 +93,13 @@ body {
     background-color: #2f5753;
 }
 
+#adv-button{
+    background-color: #9c2a70;
+}
+#adv-button:hover{
+    background-color: #692464;
+}
+
 #clear-button{
     background-color: #ad2f45;
 }
@@ -108,16 +114,11 @@ body {
     background-color: #3a3f5e;
 }
 
-.advantage-checkbox {
-    margin: 15px;
-    cursor: pointer;
-    transform: scale(2.5);
-    vertical-align: middle;
-}
 
 .dice-buttons {
     display: flex;
     flex-wrap: wrap;
+    max-width: 400px;
 }
 
 .dice-button{
